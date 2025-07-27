@@ -1,0 +1,13 @@
+{
+  "name": "sachin-portfolio",
+  "version": "1.0.0",
+  "description": "Personal portfolio website built with React and Tailwind CSS",
+  "main": "index.html",
+  "scripts": {
+    "start": "serve .",
+    "build": "echo 'No build step required'"
+  },
+  "keywords": ["portfolio", "react", "tailwind", "web-developer"],
+  "author": "Sachin Kumar Agrahari",
+  "license": "MIT"
+}
