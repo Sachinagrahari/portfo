@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sachin Kumar Agrahari - Web Developer Portfolio</title>
+    <meta name="description" content="Web Developer with expertise in SQL, PHP, JavaScript, and database reconciliation">
+    <meta name="keywords" content="web developer, SQL, PHP, JavaScript, reconciliation, database management">
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        html { scroll-behavior: smooth; }
+        .fade-in { animation: fadeIn 0.8s ease-out; }
+        .slide-up { animation: slideUp 0.6s ease-out; }
+        .bounce-in { animation: bounceIn 0.8s ease-out; }
+        .gradient-text { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .glass-effect { backdrop-filter: blur(10px); background: rgba(255, 255, 255, 0.9); }
+        .hover-lift { transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .hover-lift:hover { transform: translateY(-5px); box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
+        .pulse-glow { animation: pulseGlow 2s infinite; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(50px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes bounceIn { 0% { opacity: 0; transform: scale(0.3); } 50% { opacity: 1; transform: scale(1.05); } 70% { transform: scale(0.9); } 100% { opacity: 1; transform: scale(1); } }
+        @keyframes pulseGlow { 0%, 100% { box-shadow: 0 0 20px rgba(59, 130, 246, 0.5); } 50% { box-shadow: 0 0 30px rgba(59, 130, 246, 0.8); } }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect } = React;
+
+        // Header Component
+        const Header = () => {
+            const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+            return (
+                <header className="fixed w-full glass-effect shadow-lg z-50">
+                    <nav className="container mx-auto px-6 py-4">
+                        <div className="flex justify-between items-center">
+                            <div className="text-2xl font-bold gradient-text">Sachin's Portfolio</div>
+                            
+                            {/* Desktop Menu */}
+                            <div className="hidden md:flex space-x-8">
+                                <a href="#home" className="text-gray-700 hover:text-blue-600 transition-all duration-300 font-medium relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-blue-600 after:transition-all after:duration-300 hover:after:w-full">Home</a>
+                                <a href="#about" className="text-gray-700 hover:text-blue-600 transition-all duration-300 font-medium relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-blue-600 after:transition-all after:duration-300 hover:after:w-full">About</a>
+                                <a href="#skills" className="text-gray-700 hover:text-blue-600 transition-all duration-300 font-medium relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-blue-600 after:transition-all after:duration-300 hover:after:w-full">Skills</a>
+                                <a href="#projects" className="text-gray-700 hover:text-blue-600 transition-all duration-300 font-medium relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-blue-600 after:transition-all after:duration-300 hover:after:w-full">Projects</a>
+                                <a href="#contact" className="text-gray-700 hover:text-blue-600 transition-all duration-300 font-medium relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-blue-600 after:transition-all after:duration-300 hover:after:w-full">Contact</a>
+                            </div>
+
+                            {/* Mobile Menu Button */}
+                            <button 
+                                className="md:hidden"
+                                onClick={() => setIsMenuOpen(!isMenuOpen)}
+                                aria-label="Toggle menu"
+                            >
+                                <i className={`fas ${isMenuOpen ? 'fa-times' : 'fa-bars'} text-xl`}></i>
+                            </button>
+                        </div>
+
+                        {/* Mobile Menu */}
+                        {isMenuOpen && (
+                            <div className="md:hidden mt-4 pb-4">
+                                <a href="#home" className="block py-2 text-gray-600 hover:text-blue-600" onClick={() => setIsMenuOpen(false)}>Home</a>
+                                <a href="#about" className="block py-2 text-gray-600 hover:text-blue-600" onClick={() => setIsMenuOpen(false)}>About</a>
+                                <a href="#skills" className="block py-2 text-gray-600 hover:text-blue-600" onClick={() => setIsMenuOpen(false)}>Skills</a>
+                                <a href="#projects" className="block py-2 text-gray-600 hover:text-blue-600" onClick={() => setIsMenuOpen(false)}>Projects</a>
+                                <a href="#contact" className="block py-2 text-gray-600 hover:text-blue-600" onClick={() => setIsMenuOpen(false)}>Contact</a>
+                            </div>
+                        )}
+                    </nav>
+                </header>
+            );
+        };
+
+        // Hero Component
+        const Hero = () => {
+            return (
+                <section id="home" className="pt-20 min-h-screen flex items-center bg-gradient-to-br from-indigo-50 via-blue-50 to-purple-50 relative overflow-hidden">
+                    <div className="absolute inset-0 bg-gradient-to-r from-blue-600/5 to-purple-600/5"></div>
+                    <div className="container mx-auto px-6 text-center relative z-10">
+                        <div className="bounce-in">
+                            <div className="inline-block p-4 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full mb-8 pulse-glow">
+                                <i className="fas fa-code text-4xl text-white"></i>
+                            </div>
+                        </div>
+                        <h1 className="text-6xl md:text-7xl font-bold gradient-text mb-6 fade-in">Sachin Kumar Agrahari</h1>
+                        <p className="text-2xl md:text-3xl text-gray-700 mb-4 slide-up font-light">Web Developer</p>
+                        <p className="text-lg md:text-xl text-gray-600 mb-12 slide-up max-w-2xl mx-auto">Crafting digital experiences with modern technologies and database expertise</p>
+                        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center slide-up">
+                            <a href="#contact" className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-10 py-4 rounded-full hover:from-blue-700 hover:to-purple-700 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl font-semibold">
+                                <i className="fas fa-paper-plane mr-2"></i>Get In Touch
+                            </a>
+                            <a href="./public/resume.pdf" download className="bg-white text-gray-800 px-10 py-4 rounded-full hover:bg-gray-50 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl font-semibold border border-gray-200">
+                                <i className="fas fa-download mr-2 text-blue-600"></i>Download Resume
+                            </a>
+                        </div>
+                    </div>
+                    <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
+                        <a href="#about" className="text-gray-400 hover:text-blue-600 transition-colors">
+                            <i className="fas fa-chevron-down text-2xl"></i>
+                        </a>
+                    </div>
+                </section>
+            );
+        };
+
+        // About Component
+        const About = () => {
+            return (
+                <section id="about" className="py-24 bg-white relative">
+                    <div className="container mx-auto px-6">
+                        <div className="text-center mb-16">
+                            <h2 className="text-5xl font-bold gradient-text mb-4">About Me</h2>
+                            <div className="w-24 h-1 bg-gradient-to-r from-blue-600 to-purple-600 mx-auto rounded-full"></div>
+                        </div>
+                        <div className="max-w-4xl mx-auto">
+                            <div className="grid md:grid-cols-2 gap-12 items-center">
+                                <div className="space-y-6">
+                                    <div className="bg-gradient-to-r from-blue-50 to-purple-50 p-8 rounded-2xl hover-lift">
+                                        <div className="flex items-center mb-4">
+                                            <div className="w-12 h-12 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full flex items-center justify-center mr-4">
+                                                <i className="fas fa-laptop-code text-white text-xl"></i>
+                                            </div>
+                                            <h3 className="text-xl font-bold text-gray-800">Professional Experience</h3>
+                                        </div>
+                                        <p className="text-gray-600 leading-relaxed">
+                                            1+ year in web development with SQL Server technology and 1.8+ years in finance operations, 
+                                            specializing in database management and reconciliation processes.
+                                        </p>
+                                    </div>
+                                    <div className="bg-gradient-to-r from-purple-50 to-pink-50 p-8 rounded-2xl hover-lift">
+                                        <div className="flex items-center mb-4">
+                                            <div className="w-12 h-12 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full flex items-center justify-center mr-4">
+                                                <i className="fas fa-graduation-cap text-white text-xl"></i>
+                                            </div>
+                                            <h3 className="text-xl font-bold text-gray-800">Education & Growth</h3>
+                                        </div>
+                                        <p className="text-gray-600 leading-relaxed">
+                                            Currently pursuing Bachelor of Science in Physics & Mathematics while gaining hands-on 
+                                            experience in software development and modern web technologies.
+                                        </p>
+                                    </div>
+                                </div>
+                                <div className="space-y-6">
+                                    <div className="bg-gradient-to-r from-green-50 to-blue-50 p-8 rounded-2xl hover-lift">
+                                        <div className="flex items-center mb-4">
+                                            <div className="w-12 h-12 bg-gradient-to-r from-green-600 to-blue-600 rounded-full flex items-center justify-center mr-4">
+                                                <i className="fas fa-database text-white text-xl"></i>
+                                            </div>
+                                            <h3 className="text-xl font-bold text-gray-800">Technical Expertise</h3>
+                                        </div>
+                                        <p className="text-gray-600 leading-relaxed">
+                                            Expertise in UPI/IMPS reconciliation, database management, and web development 
+                                            technologies including HTML, CSS, JavaScript, and PHP.
+                                        </p>
+                                    </div>
+                                    <div className="bg-gradient-to-r from-orange-50 to-red-50 p-8 rounded-2xl hover-lift">
+                                        <div className="flex items-center mb-4">
+                                            <div className="w-12 h-12 bg-gradient-to-r from-orange-600 to-red-600 rounded-full flex items-center justify-center mr-4">
+                                                <i className="fas fa-heart text-white text-xl"></i>
+                                            </div>
+                                            <h3 className="text-xl font-bold text-gray-800">Personal Values</h3>
+                                        </div>
+                                        <p className="text-gray-600 leading-relaxed">
+                                            Hardworking, adaptable, and eager to learn. Cricket enthusiast who values teamwork, 
+                                            discipline, and collaboration in both sports and professional life.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            );
+        };
+
+        // Skills Component
+        const Skills = () => {
+            const skills = [
+                { name: 'HTML/CSS', icon: 'fab fa-html5', color: 'text-orange-500' },
+                { name: 'JavaScript', icon: 'fab fa-js-square', color: 'text-yellow-500' },
+                { name: 'PHP', icon: 'fab fa-php', color: 'text-purple-500' },
+                { name: 'SQL Server', icon: 'fas fa-database', color: 'text-blue-600' },
+                { name: 'jQuery', icon: 'fas fa-code', color: 'text-blue-400' },
+                { name: 'C/C++', icon: 'fas fa-code-branch', color: 'text-gray-600' },
+                { name: 'MS Excel', icon: 'fas fa-file-excel', color: 'text-green-500' },
+                { name: 'Database Management', icon: 'fas fa-server', color: 'text-red-500' }
+            ];
+
+            return (
+                <section id="skills" className="py-24 bg-gradient-to-br from-gray-50 to-blue-50">
+                    <div className="container mx-auto px-6">
+                        <div className="text-center mb-16">
+                            <h2 className="text-5xl font-bold gradient-text mb-4">Skills & Technologies</h2>
+                            <div className="w-24 h-1 bg-gradient-to-r from-blue-600 to-purple-600 mx-auto rounded-full"></div>
+                            <p className="text-gray-600 mt-4 text-lg">Technologies I work with to bring ideas to life</p>
+                        </div>
+                        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-6xl mx-auto">
+                            {skills.map((skill, index) => (
+                                <div key={index} className="group text-center p-8 bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-105 hover-lift border border-gray-100">
+                                    <div className="relative">
+                                        <div className="absolute inset-0 bg-gradient-to-r from-blue-600/10 to-purple-600/10 rounded-full transform scale-0 group-hover:scale-100 transition-transform duration-300"></div>
+                                        <i className={`${skill.icon} text-5xl ${skill.color} mb-4 relative z-10 transform group-hover:scale-110 transition-transform duration-300`}></i>
+                                    </div>
+                                    <h3 className="text-lg font-bold text-gray-800 group-hover:text-blue-600 transition-colors duration-300">{skill.name}</h3>
+                                    <div className="w-0 h-0.5 bg-gradient-to-r from-blue-600 to-purple-600 mx-auto mt-2 group-hover:w-full transition-all duration-300"></div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </section>
+            );
+        };
+
+        // Projects Component
+        const Projects = () => {
+            const projects = [
+                {
+                    title: 'UPI Reconciliation System',
+                    description: 'Comprehensive UPI reconciliation handling disputes, inward/outward transactions, and UPI Lite reconciliation with automated reporting',
+                    technologies: ['SQL', 'Database Management', 'NPCI Integration', 'Transaction Processing'],
+                    link: '#',
+                    demo: '#'
+                },
+                {
+                    title: 'IMPS Reconciliation (UOB Bank)',
+                    description: 'On-site reconciliation system for UOB Bank handling UPI/IMPS payments, unreconciled entries, and daily reconciliation certificates',
+                    technologies: ['SQL', 'Banking Systems', 'Payment Processing', 'Report Generation'],
+                    link: '#',
+                    demo: '#'
+                },
+                {
+                    title: 'Database Management System',
+                    description: 'Efficient database management for transaction reconciliation, fraud data management, and settlement processing',
+                    technologies: ['SQL Server', 'Data Analysis', 'Report Generation', 'Database Optimization'],
+                    link: '#',
+                    demo: '#'
+                },
+                {
+                    title: 'Web Development Projects',
+                    description: 'Various web development projects using modern technologies and responsive design principles',
+                    technologies: ['HTML', 'CSS', 'JavaScript', 'PHP', 'jQuery'],
+                    link: '#',
+                    demo: '#'
+                }
+            ];
+
+            return (
+                <section id="projects" className="py-20 bg-white">
+                    <div className="container mx-auto px-6">
+                        <h2 className="text-4xl font-bold text-center text-gray-800 mb-12">Projects</h2>
+                        <div className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+                            {projects.map((project, index) => (
+                                <div key={index} className="bg-gray-50 rounded-lg p-6 shadow-md hover:shadow-lg transition">
+                                    <h3 className="text-xl font-bold text-gray-800 mb-2">{project.title}</h3>
+                                    <p className="text-gray-600 mb-4">{project.description}</p>
+                                    <div className="flex flex-wrap gap-2 mb-4">
+                                        {project.technologies.map((tech, techIndex) => (
+                                            <span key={techIndex} className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">
+                                                {tech}
+                                            </span>
+                                        ))}
+                                    </div>
+                                    <div className="flex space-x-4">
+                                        <a href={project.link} className="text-blue-600 hover:text-blue-800 transition" target="_blank" rel="noopener noreferrer">
+                                            <i className="fab fa-github mr-1"></i>Code
+                                        </a>
+                                        <a href={project.demo} className="text-blue-600 hover:text-blue-800 transition" target="_blank" rel="noopener noreferrer">
+                                            <i className="fas fa-external-link-alt mr-1"></i>Demo
+                                        </a>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </section>
+            );
+        };
+
+        // Contact Component
+        const Contact = () => {
+            const [formData, setFormData] = useState({ name: '', email: '', message: '' });
+
+            const handleSubmit = (e) => {
+                e.preventDefault();
+                console.log('Form submitted:', formData);
+                alert('Message logged to console (demo mode)');
+                setFormData({ name: '', email: '', message: '' });
+            };
+
+            return (
+                <section id="contact" className="py-20 bg-gray-50">
+                    <div className="container mx-auto px-6">
+                        <h2 className="text-4xl font-bold text-center text-gray-800 mb-12">Contact Me</h2>
+                        <div className="max-w-4xl mx-auto grid md:grid-cols-2 gap-12">
+                            <div>
+                                <h3 className="text-2xl font-bold text-gray-800 mb-6">Get In Touch</h3>
+                                <div className="space-y-4">
+                                    <div className="flex items-center">
+                                        <i className="fas fa-envelope text-blue-600 mr-4"></i>
+                                        <span className="text-gray-600">sachinagrahari507@gmail.com</span>
+                                    </div>
+                                    <div className="flex items-center">
+                                        <i className="fas fa-phone text-blue-600 mr-4"></i>
+                                        <span className="text-gray-600">+91-8090872889</span>
+                                    </div>
+                                    <div className="flex items-center">
+                                        <i className="fab fa-github text-blue-600 mr-4"></i>
+                                        <a href="https://github.com/Sachinagrahari" className="text-gray-600 hover:text-blue-600 transition" target="_blank" rel="noopener noreferrer">
+                                            github.com/Sachinagrahari
+                                        </a>
+                                    </div>
+                                    <div className="flex items-center">
+                                        <i className="fas fa-map-marker-alt text-blue-600 mr-4"></i>
+                                        <span className="text-gray-600">Virar(E), Maharashtra, India</span>
+                                    </div>
+                                </div>
+                                <div className="mt-8">
+                                    <a href="./public/resume.pdf" download className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition inline-block">
+                                        <i className="fas fa-download mr-2"></i>Download Resume
+                                    </a>
+                                </div>
+                            </div>
+                            <div>
+                                <form onSubmit={handleSubmit} className="space-y-6">
+                                    <div>
+                                        <label htmlFor="name" className="block text-gray-700 font-medium mb-2">Name</label>
+                                        <input
+                                            type="text"
+                                            id="name"
+                                            value={formData.name}
+                                            onChange={(e) => setFormData({...formData, name: e.target.value})}
+                                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                            required
+                                        />
+                                    </div>
+                                    <div>
+                                        <label htmlFor="email" className="block text-gray-700 font-medium mb-2">Email</label>
+                                        <input
+                                            type="email"
+                                            id="email"
+                                            value={formData.email}
+                                            onChange={(e) => setFormData({...formData, email: e.target.value})}
+                                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                            required
+                                        />
+                                    </div>
+                                    <div>
+                                        <label htmlFor="message" className="block text-gray-700 font-medium mb-2">Message</label>
+                                        <textarea
+                                            id="message"
+                                            rows="4"
+                                            value={formData.message}
+                                            onChange={(e) => setFormData({...formData, message: e.target.value})}
+                                            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                            required
+                                        ></textarea>
+                                    </div>
+                                    <button
+                                        type="submit"
+                                        className="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition font-medium"
+                                    >
+                                        Send Message
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            );
+        };
+
+        // Footer Component
+        const Footer = () => {
+            return (
+                <footer className="bg-gray-800 text-white py-8">
+                    <div className="container mx-auto px-6 text-center">
+                        <div className="flex justify-center space-x-6 mb-4">
+                            <a href="mailto:sachinagrahari507@gmail.com" className="text-gray-400 hover:text-white transition" aria-label="Email">
+                                <i className="fas fa-envelope text-2xl"></i>
+                            </a>
+                            <a href="https://github.com/Sachinagrahari" className="text-gray-400 hover:text-white transition" aria-label="GitHub" target="_blank" rel="noopener noreferrer">
+                                <i className="fab fa-github text-2xl"></i>
+                            </a>
+                            <a href="tel:+918090872889" className="text-gray-400 hover:text-white transition" aria-label="Phone">
+                                <i className="fas fa-phone text-2xl"></i>
+                            </a>
+                        </div>
+                        <p className="text-gray-400">© 2025 Sachin Kumar Agrahari. All rights reserved.</p>
+                    </div>
+                </footer>
+            );
+        };
+
+        // Main App Component
+        const App = () => {
+            return (
+                <div>
+                    <Header />
+                    <Hero />
+                    <About />
+                    <Skills />
+                    <Projects />
+                    <Contact />
+                    <Footer />
+                </div>
+            );
+        };
+
+        ReactDOM.render(<App />, document.getElementById('root'));
+    </script>
+</body>
+</html>
